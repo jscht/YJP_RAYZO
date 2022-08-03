@@ -6,3 +6,6 @@
 
 ### 사용된 소프트웨어
 VSCode, Node.js   
+
+### 사용된 언어
+Javascript   
