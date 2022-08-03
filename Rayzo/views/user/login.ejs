@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+      text-decoration: none;
+      font-family: sans-serif;
+
+    }
+
+    body {
+      background-color: #3B4E32;
+    }
+
+    .loginForm {
+      position: absolute;
+      width: 300px;
+      height: 400px;
+      padding: 30px, 20px;
+      background-color: #FFFFFF;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 15px;
+    }
+
+    .loginForm h2 {
+      text-align: center;
+      margin: 30px;
+    }
+
+    .idForm {
+      border-bottom: 2px solid #adadad;
+      margin: 30px;
+      padding: 10px 10px;
+    }
+
+    .passForm {
+      border-bottom: 2px solid #adadad;
+      margin: 30px;
+      padding: 10px 10px;
+    }
+
+    .id {
+      width: 100%;
+      border: none;
+      outline: none;
+      color: #636e72;
+      font-size: 16px;
+      height: 25px;
+      background: none;
+    }
+
+    .pw {
+      width: 100%;
+      border: none;
+      outline: none;
+      color: #636e72;
+      font-size: 16px;
+      height: 25px;
+      background: none;
+    }
+
+    .btn {
+      position: relative;
+      left: 40%;
+      transform: translateX(-50%);
+      margin-bottom: 40px;
+      width: 80%;
+      height: 40px;
+      background: linear-gradient(125deg, #3B4E32, #56A902, #3B4E32);
+      background-position: left;
+      background-size: 200%;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.4s;
+      display: inline;
+    }
+
+    .btn:hover {
+      background-position: right;
+    }
+
+    .bottomText {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body width="100%" height="100%">
+
+  <% if(session.email){ %>
+  <form action="/users/logout" method="get" class="loginForm">
+    <h2>log in success</h2>
+    <div class="idForm">
+    </div><br>
+    <div class="passForm">
+    </div>
+    <input type="submit" value="Log out" class="btn">
+    <div class="bottomText">Go to <a href="http://localhost:3000/board">Main Page</a></div>
+  </form>
+  <% } else{ %>
+  <form action="/users/login" method="post" class="loginForm">
+    <h2>Log In</h2>
+    <div class="idForm">
+      <input type="text" name="uEmail" class="id" placeholder="E-mail">
+    </div>
+    <div class="passForm">
+      <input type="password" name="password" class="pw" placeholder="Password">
+    </div>
+    <input type="submit" value="Log in" class="btn">
+
+    <div class="bottomText">Do you want to join? <a href="/users/sign_up">sign up</a></div>
+  </form>
+  <% } %>

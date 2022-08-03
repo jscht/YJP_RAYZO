@@ -1,0 +1,70 @@
+친절한 정인씨 글 남기다...
+               ┌───────────┐
+               │ 1999~2021 │
+               │    RIP    │
+               │ 여기에    │
+               │    잠들다 │
+               │           │
+───────────────┴───────────┴──────────────
+                    @>---
+
+
+/bin
+    프로그램의 실행과 관련이 있는 폴더
+    www 파일을 실행해 서버 실행
+        /www.js
+            포트설정
+            이벤트 핸들링
+/public
+    js, css, img 파일 등 리소스 파일이 있는 폴더
+/routes
+    라우터 관련된 모듈이 있는 폴더
+/view
+    ejs 템플릿 파일이 있는 폴더
+
+app.js
+    어플리케이션 중심이 되는 파일
+    모듈 선언 / 서버 설정 / 미들웨어 정의 및 등록 / 라우트 정의 등
+    서버 운영을 위한 로직 작성
+    모듈 선언, 서버 설정, 
+package.json
+    현재 어플리케이션 관련된 정보와 모듈을 설치하는데 필요한 의존성이 작성된 파일
+    //package.json
+    {
+      "name": "rayzo", //projectName
+      "version": "0.0.0", //version
+      "private": true,
+      "scripts": {
+        "start": "node ./bin/www"
+      },
+      "dependencies": { //의존, 종속성
+        "cookie-parser": "~1.4.4",
+        "debug": "~2.6.9",
+        "ejs": "~2.6.1",
+        "express": "~4.16.1",
+        "express-session": "^1.17.2",
+        "http-errors": "~1.6.3",
+        "method-override": "^3.0.0",
+        "morgan": "~1.9.1",
+        "mysql2": "^2.2.5",
+        "sequelize": "^6.6.2"
+      }
+    }
+
+
+C:\Rayzo에서
+    npm install
+    npm install mysql2 sequelize
+    npm install -g sequelize-cli
+    npm install --save express-session
+    npm install method-override
+    sequelize init // WARN 뜨는지 확인
+    sequelize db:migrate
+    npm start
+
+경로에 대해서
+    Start :     localhost:3000/
+    login :     localhost:3000/users/login
+    signup :    localhost:3000/users/sign_up
+    board :     localhost:3000/board
+    modify :    localhost:3000/edit/id  (1~...)

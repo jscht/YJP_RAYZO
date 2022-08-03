@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Rayzo Main Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <noscript>
+        <link rel="stylesheet" href="../css/2nd/noscript.css" /></noscript>
+    <style>
+        table {
+            text-align: center;
+            background-color: #8BBABB;
+        }
+
+        input[type=text] {
+            background-color: transparent;
+            border: none;
+            border-right: 0px;
+            border-top: 0px;
+            border-left: 0px;
+            border-bottom: 0px;
+            color: white;
+            text-align: justify;
+        }
+
+        input::placeholder {
+            color: white;
+            text-align: center;
+        }
+
+        td input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+
+
+<body class="landing is-preload">
+    <link rel="stylesheet" href="../css/2nd/Main.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+
+    <div id="page-wrapper">
+        <!-- Header -->
+        <header id="header" class="alt">
+            <h1><a href="/" class="scrolly on">Rayzo</a></h1>
+            <h1><a href="#one" class="scrolly">introduce</a></h1>
+            <h1><a href="#two" class="scrolly">About</a></h1>
+            <h1><a href="#three" class="scrolly">Q&A</a></h1>
+        </header>
+
+        <!-- Banner -->
+        <section id="banner">
+        </section>
+
+        <!-- one -->
+        <section id="one" class="wrapper alt style2">
+            <% for(let list of lists){ %>
+            <section class="spotlight">
+                <div class="image"><img src="<%=list.imag%>" alt="" /></div>
+                <div class="content">
+                    <h2><%=list.member%></h2>
+                    <p><%=list.introduce%></p>
+                    <a href="/team/<%=list.id%>"><input type="image" src="images/fix.png" height="22px" width="22px"></a>
+                </div>
+            </section>
+            <% } %>
+        </section>
+
+        <!-- two -->
+        <section id="two" class="wrapper style3 special">
+            <div class="inner">
+                <header class="major">
+                    <h2>about web-database</h2>
+                    <p>빅데이터, AI 및 IoT 전문가, 모바일(Android, iOS) 앱 개발자, 전자정부 표준프레임워크 기반의 기업 솔루션 개발자 양성.</p>
+                </header>
+                <ul class="features">
+                    <% for(let major of majors){ %>
+                        <li class="<%=major.className%>">
+                            <h3><%=major.course%></h3>
+                            <p><%=major.introduce%></p>
+                            <a href="/major/<%=major.id%>"><input type="image" src="images/fix.png" height="22px" width="22px"></a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </section>
+
+        <!--게시판-->
+        <!-- three -->
+        <section id="three">
+            <br>
+            <center>
+                <header class="major">
+                    <h2>Q&A</h2>
+                </header>
+            </center>
+            <% for(let post of posts) { %>
+            <table width="100%">
+                <tr>
+                    <td width="20%">제목</td>
+                    <td width="40%">내용</td>
+                    <td width="30%">작성일</td>
+                    <td width="10%"></td>
+                </tr>
+                <tr>
+                    <td><%= post.title %></td>
+                    <td><%= post.writer %></td>
+                    <td><%= post.createdAt %></td>
+                    <!--현재 날짜와 시간을 나타냄-->
+                    <td><a href="/board/<%=post.id%>?_method=GET"><input type="image" src="images/fix.png" height="22px"
+                                width="22px"></a>
+                        <form action="/board/<%=post.id%>?_method=DELETE" method="post"><input type="image"
+                                src="images/delete.png" name="submit" value="submit" width="22px" height="22px"></form>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td width="20%">제목</td>
+                    <td width="40%">답변</td>
+                    <td width="30%"></td>
+                    <td width="10%"><img src="images/comment.png" width="22px" height="22px"></td>
+                </tr>
+                <% if(post.replies){
+                    for(let reply of post.replies){ %>
+                <tr>
+                    <td><%= reply.dataValues.writer %></td>
+                    <td><%= reply.dataValues.content %></td>
+                </tr>
+                <% } %>
+                <% } %>
+            </table>
+            <form action="/reply/<%=post.id%>" method="post">
+                <table>
+                    <tr>
+                        <td width="20%">답변 작성</td>
+                        <td width="40%"><input type="text" width="100%" name="replyWriter" placeholder="제목 입력"></td>
+                        <td width="30%"><input type="text" width="100%" name="replyContent" placeholder="답변 입력"></td>
+                        <td width="10%"><input type="image" src="images/save.png" name="submit" value="submit"
+                                width="22px" height="22px"></td>
+                    </tr>
+                </table>
+            </form>
+            <% } %>
+
+            <center>
+                <header class="major">
+                    <h2>Q&A 문의</h2>
+                </header>
+            </center>
+            <form action="/board" method="POST">
+                <table>
+                    <tr>
+                        <td width="20%">제목</td>
+                        <td width="40%">내용</td>
+                        <td width="30%"></td>
+                        <td width="10%"></td>
+                    </tr>
+                    <tr>
+                        <td width="20%"><input type="text" width="100%" name="inTitle" placeholder="제목 입력"></td>
+                        <td width="40%"><input type="text" width="100%" name="inWriter" placeholder="내용 입력"></td>
+                        <td width="30%"></td>
+                        <td width="10%"><input type="image" src="images/save.png" name="submit" value="submit"
+                                width="22px" height="22px"></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+        </footer>
+        <script src="js/2nd/jquery.min.js"></script>
+        <script src="js/2nd/jquery.scrollex.min.js"></script>
+        <script src="js/2nd/jquery.scrolly.min.js"></script>
+        <script src="js/2nd/browser.min.js"></script>
+        <script src="js/2nd/breakpoints.min.js"></script>
+        <script src="js/2nd/util.js"></script>
+        <script src="js/2nd/main.js"></script>
+        <script src="js/2nd/scroll_menu.js"></script>
+</body>
+
+</html>
